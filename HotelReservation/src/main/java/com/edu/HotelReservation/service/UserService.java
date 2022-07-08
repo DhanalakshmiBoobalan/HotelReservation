@@ -27,7 +27,7 @@ public interface UserService {
 
 	List<User> getUserByFullName(String firstName, String lastName);
 
-	User getUserByEmailId(String emailId);
+	Optional<User> getUserByEmailId(String emailId);
 
 //	User addUser(@Valid User user);
 

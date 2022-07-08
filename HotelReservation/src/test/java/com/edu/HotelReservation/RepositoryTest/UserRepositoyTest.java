@@ -1,6 +1,7 @@
 package com.edu.HotelReservation.RepositoryTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,8 +32,8 @@ public class UserRepositoyTest {
 	
 	@Test
 	public void getUserTest() {
-		User user = userRepository.findById(102L).get();
-		Assertions.assertThat(user.getUserId()).isEqualTo(102L);
+		User user = userRepository.findById(11L).get();
+		Assertions.assertThat(user.getUserId()).isEqualTo(11L);
 	}
 	
 	@Test
@@ -43,25 +44,25 @@ public class UserRepositoyTest {
 	
 	@Test
 	public void updateUserTest() {
-		User user = userRepository.findById(102L).get();
-		user.setEmailId("xyz@gmail.com");
+		User user = userRepository.findById(462L).get();
+		user.setEmailId("hij@gmail.com");
 		User updated = userRepository.save(user);
-		Assertions.assertThat(updated.getEmailId()).isEqualTo("xyz@gmail.com");
+		Assertions.assertThat(updated.getEmailId()).isEqualTo("hij@gmail.com");
 	}
 	
-/*	@Test
+	@Test
 	public void deleteUserTest() {
-		User use = userRepository.findById(12L).get();
+		User use = userRepository.findById(462L).get();
 		userRepository.delete(use);
-		//12
+		//462
 		User user = null;
-		Optional<User> use1 = userRepository.findByEmailId("xyz@gmail.com");
+		Optional<User> use1 = userRepository.getUserByEmailId("hij@gmail.com");
 		if(use1.isPresent()) {
 			user = use1.get(); //null
 		}
 		
 		Assertions.assertThat(user).isNull();
 		
-	} */
+	}
 
 }

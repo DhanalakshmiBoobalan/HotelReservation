@@ -28,10 +28,10 @@ public class RoomController {
 	@Autowired
 	RoomService roomService;
 	
-/*	public RoomController(RoomService roomService) {
+	public RoomController(RoomService roomService) {
 		super();
 		this.roomService = roomService;
-	} */
+	}
 	
 	@GetMapping
 	public List<Room> getRoomList(){
