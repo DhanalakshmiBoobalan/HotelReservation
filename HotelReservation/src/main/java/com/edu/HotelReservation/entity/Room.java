@@ -18,8 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
 @Entity
-@Table(name="roomTbl",
-uniqueConstraints = {@UniqueConstraint(columnNames = {"roomNo"})})
+@Table(name="roomTbl")
 
 public class Room {
 	
@@ -28,7 +27,8 @@ public class Room {
 	@SequenceGenerator(name = "seq", initialValue = 101)
 	
 	private long roomId;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
+	
 	private long roomNo;
 	@Column(nullable = false)
 	@Range(min=1,max=3,message="Allows only 3 beds in a Room")

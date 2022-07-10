@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.edu.HotelReservation.entity.Reservation;
 import com.edu.HotelReservation.entity.User;
 import com.edu.HotelReservation.exception.GivenIdNotFoundException;
+import com.edu.HotelReservation.exception.NameNotFoundException;
 import com.edu.HotelReservation.exception.NoRecordFoundException;
+import com.edu.HotelReservation.exception.RecordAlreadyExistException;
 import com.edu.HotelReservation.repository.UserRepository;
 
 @Service
@@ -22,7 +24,13 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User saveUser(User user) {
-		return userRepository.save(user);
+		Optional<User> users = userRepository.findById(user.getUserId());
+		if(!users.isPresent())
+			return userRepository.save(user);
+		else
+			throw new RecordAlreadyExistException();
+		
+//		return userRepository.save(user);
 	}
 
 	@Override
@@ -51,14 +59,14 @@ public class UserServiceImpl implements UserService{
 		User users = new User();
 		users = userRepository.findById(userId).orElseThrow(()-> new NoRecordFoundException());
 				
-		user.setFirstName(user.getFirstName());
-		user.setLastName(user.getLastName());
-		user.setContactNo(user.getContactNo());
-		user.setAadharNo(user.getAadharNo());
-		user.setUserName(user.getUserName());
-		user.setPassword(user.getPassword());
-		user.setEmailId(user.getEmailId());
-		user.setFullAddress(user.getFullAddress());
+		users.setFirstName(user.getFirstName());
+		users.setLastName(user.getLastName());
+		users.setContactNo(user.getContactNo());
+		users.setAadharNo(user.getAadharNo());
+		users.setUserName(user.getUserName());
+		users.setPassword(user.getPassword());
+		users.setEmailId(user.getEmailId());
+		users.setFullAddress(user.getFullAddress());
 		
 		userRepository.save(users);
 		return users;
@@ -79,7 +87,16 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> getUserByLastName(String lastName) {
-		return userRepository.getUserByLastName(lastName);
+		List<User> user = userRepository.getUserByLastName(lastName);
+		if(user.isEmpty())
+		{
+			throw new NameNotFoundException();
+		}
+		else
+		{
+			return user;
+		}
+//		return userRepository.getUserByLastName(lastName);
 	}
 
 	@Override

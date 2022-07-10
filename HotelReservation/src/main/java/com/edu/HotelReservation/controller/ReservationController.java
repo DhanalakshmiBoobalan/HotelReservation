@@ -3,6 +3,8 @@ package com.edu.HotelReservation.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +47,7 @@ public class ReservationController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Reservation> saveReservation(@RequestBody Reservation reservation){
+	public ResponseEntity<Reservation> saveReservation(@Valid @RequestBody Reservation reservation){
 		return new ResponseEntity<Reservation>(reservationService.saveReservation(reservation), HttpStatus.CREATED);
 		
 	}
@@ -62,9 +64,10 @@ public class ReservationController {
 		
 	}
 	
-	@GetMapping("/GetReservationByDateAndTime/{reservationDateTime}")
+	@GetMapping("/GetReservationByDateAndTime/{reservationDateAndTime}")
 	public List<Reservation> getReservationListByDateAndTime(@PathVariable("reservationDateAndTime") LocalDateTime reservationDateAndTime)
 	{
+		System.out.println(reservationDateAndTime);
 		return reservationService.getReservationListByDateAndTime(reservationDateAndTime);
 	}
 

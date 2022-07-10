@@ -24,11 +24,17 @@ public class UserRepositoyTest {
 	private UserRepository userRepository;
 	
 	@Test
+	public void saveUserTest() {
+		User user = userRepository.save(new User(12,"Priya","Boobalan","3456789345","123456798765","Priya","56784","priya@gmail.com","Mumbai"));
+		Assertions.assertThat(user.getUserId()).isGreaterThan(0);
+	}
+	
+/*	@Test
 	public void saveUserTest() {  ///test case
 		User user = userRepository.save(new User(11,"Dhana","Lakshmi","9841509185","567899012344","Dhana","12345","abc@gmail.com","Chennai"));
 		Assertions.assertThat(user.getUserId()).isGreaterThan(0);
 		// if id is greater than 0
-	}
+	} */
 	
 	@Test
 	public void getUserTest() {

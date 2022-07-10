@@ -1,6 +1,7 @@
 package com.edu.HotelReservation.exception;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,16 @@ public class GlobalExceptionHandlers {
 		
 	}
 	
+	@ExceptionHandler(NameNotFoundException.class)
+	public ResponseEntity<Object> handleNameNotFoundException() {
+	return new ResponseEntity<Object> ("Given Name Record not found!",HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(RecordAlreadyExistException.class)
+	public ResponseEntity<Object> handleRecordAlreadyExistException(){
+		return new ResponseEntity<Object> ("Record is already exist",HttpStatus.NOT_FOUND);
+	}
+	
 	@ExceptionHandler(value= {MethodArgumentNotValidException.class })
 	public ResponseEntity<Map<String, String> >handleValidationExceptions(
 	  MethodArgumentNotValidException ex) {
@@ -39,4 +50,6 @@ public class GlobalExceptionHandlers {
 	    });
 	    return new ResponseEntity<Map<String,String>>(errors, HttpStatus.BAD_REQUEST);
 	}
+	
+	
 }

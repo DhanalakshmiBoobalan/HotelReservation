@@ -11,6 +11,8 @@ public interface RoomRepository extends JpaRepository<Room, Long>{
 	Optional<Room> findByRoomNo(long roomNo);
 
 	Optional<Room> findByNoOfBed(String noOfBed);
+
+	Optional<Room> getRoomByRoomNo(String string); //
 	
 /*	@Query("select r from Room r where r.roomNo = :roomNo")
 	Optional<Room> getRoomByRoomNo(@Param("roomNo")String roomNo);

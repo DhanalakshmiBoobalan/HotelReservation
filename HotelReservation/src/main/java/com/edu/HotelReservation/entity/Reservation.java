@@ -48,7 +48,7 @@ public class Reservation {
 	private Room room;
 	
 	@PrePersist
-	public void addCheckInDate()
+	public void addCheckInDateTime()
 	{
 		LocalDateTime now = LocalDateTime.now();
 		this.reservationDateAndTime=now;
